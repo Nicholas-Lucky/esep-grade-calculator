@@ -182,21 +182,23 @@ func TestGetGradeTypes(t *testing.T) {
 	gradeCalculator.AddGrade("essay on ai ethics", 100, Essay)
 	gradeCalculator.AddGrade("exam 3", 100, Exam)
 
-	for _, grade := range gradeCalculator.assignments {
-		if grade.Type.String() != expected_assignment_string {
-			t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_assignment_string, grade.Type.String())
+	for _, grade := range gradeCalculator.grades {
+		if grade.Type == Assignment {
+			if grade.Type.String() != expected_assignment_string {
+				t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_assignment_string, grade.Type.String())
+			}
 		}
-	}
 
-	for _, grade := range gradeCalculator.exams {
-		if grade.Type.String() != expected_exam_string {
-			t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_exam_string, grade.Type.String())
+		if grade.Type == Exam {
+			if grade.Type.String() != expected_exam_string {
+				t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_exam_string, grade.Type.String())
+			}
 		}
-	}
 
-	for _, grade := range gradeCalculator.essays {
-		if grade.Type.String() != expected_essay_string {
-			t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_essay_string, grade.Type.String())
+		if grade.Type == Essay {
+			if grade.Type.String() != expected_essay_string {
+				t.Errorf("Expected String() to return '%s'; got '%s' instead", expected_essay_string, grade.Type.String())
+			}
 		}
 	}
 }
